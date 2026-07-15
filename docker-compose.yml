@@ -1,0 +1,22 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - WHISPER_MODEL=${WHISPER_MODEL:-base}
+      - DEVICE=${DEVICE:-cpu}
+      - COMPUTE_TYPE=${COMPUTE_TYPE:-float32}
+    volumes:
+      - hf-models:/models
+    # To enable GPU, uncomment and use an nvidia/cuda base image:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+volumes:
+  hf-models:
